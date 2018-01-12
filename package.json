@@ -4,6 +4,7 @@
   "description": "**ベースはNode.js**",
   "main": "index.js",
   "scripts": {
+    "sync": "node bin/sync",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git+https://github.com/ahaha0807/twitter-repl.git",

@@ -32,9 +32,9 @@ module.exports.controller = (command, data) => {
 // CLI実行用
 /*
 * サンプルリクエスト
-*   node app/controller.js sample sampleRequest/sample.json
+*   node middlewares/controller.js sample sampleRequests/sample.json
 *
-*   node app/controller.js [テストするコマンド] [テストするリクエストが書かれたjsonファイルへのパス]
+*   node middlewares/controller.js [テストするコマンド] [テストするリクエストが書かれたjsonファイルへのパス]
 */
 const controllerWithArgs = () => {
     let args = process.argv[2];

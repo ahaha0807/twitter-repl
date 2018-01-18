@@ -2,7 +2,7 @@
 
 'use strict';
 
-const models = require('../models');
+const models = require('../repositories');
 
 models.sequelize.sync({
     force: true,

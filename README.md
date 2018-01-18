@@ -29,3 +29,37 @@ node app/controller.js sample sampleRequest/sample.json
 
 # node app/controller.js [テストするコマンド] [テストするリクエストが書かれたjsonファイルへのパス]
 ```
+
+# ディレクトリ構造
+
+```
+.
+├── LICENSE
+├── README.md
+├── bin/ # npm scriptで実行するスクリプト置き場（基本触らない）
+├── config/ # sequelize 用のdb config置き場
+├── db/ # SQLiteのdbファイル置き場
+├── models/ # コマンドのフロー（middlewares/*.js）から使われるメソッド郡
+│   ├── Project.js
+│   └── User.js
+├── middlewares/ # 外部アクセス・コマンドフロー処理をまとめる
+│   ├── accessor.js # 外部APIアクセス処理
+│   ├── controller.js # コマンドの処理振り分け
+│   ├── monitor.js # Twitterのリプライを監視
+│   └── sample.js # 各コマンドのフローはこんな感じでコマンドあたり一つのファイルまとめる
+├── migrations/ # マイグレーションファイル置き場（sequelizeによって作成）
+├── repositories/ # ORM処理置き場（sequelizeによって作成=>repositoriesにディレクトリ名変更）
+├── node_modules/ 
+├── package.json
+├── sampleRequests/ # コマンドを試験実行をする時に使うリクエスト置き場
+├── seeders/ # DB初期値を登録する処理を書くファイル置き場（sequelizeによって作成）
+└── yarn.lock
+```
+
+※issuesのlabelと基本的に一致し、そこにメソッドを実装していく
+
+- Project : models/Project.js
+- User : models/User.js
+- Accessor : middlewares/accessor.js
+- Monitor : middlewares/monitor.js
+- Repository : repositories/*.js （index.js以外のDBに対応するjsファイルにメソッド実装をする）

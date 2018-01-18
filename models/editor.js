@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   var Editor = sequelize.define('Editor', {
     projectID: DataTypes.STRING,
     code: DataTypes.STRING,
-    lineIndex: DataTypes.INT
+    lineIndex: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {

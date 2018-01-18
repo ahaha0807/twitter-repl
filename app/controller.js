@@ -29,6 +29,13 @@ module.exports.controller = (command, data) => {
     }
 };
 
+// CLI実行用
+/*
+* サンプルリクエスト
+*   node app/controller.js sample sampleRequest/sample.json
+*
+*   node app/controller.js [テストするコマンド] [テストするリクエストが書かれたjsonファイルへのパス]
+*/
 const controllerWithArgs = () => {
     let args = process.argv[2];
     let filePath = process.argv[3];

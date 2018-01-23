@@ -19,6 +19,13 @@ npm run sync # dbファイルの作成
 sequelize db:migrate --env development # table構造の作成
 ```
 
+# 単体テスト
+```
+npm test
+```
+`mocha` が実行されます。
+
+
 # 実行テスト
 
 `controller.js` を `node` コマンドを使ってCLI実行することが出来るので、

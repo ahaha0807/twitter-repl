@@ -12,4 +12,10 @@ describe('models_project', function () {
         assert.equal(project.projectId, expected.projectId)
         assert.equal(project.language, expected.language)
     })
+
+    it('createId', function () {
+        let expected = 'String Type'
+
+        assert.equal(typeof(Project.createId()), typeof(expected))
+    })
 })

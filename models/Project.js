@@ -3,4 +3,9 @@ module.exports = class Project {
         this.projectId = _projectId
         this.language = _language
     }
+
+
+    static createId() {
+
+    }
 }

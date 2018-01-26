@@ -8,4 +8,9 @@ module.exports = class Project {
     static createId() {
 
     }
+
+
+    static checkLanguage(selectedLanguage) {
+
+    }
 }

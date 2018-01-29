@@ -32,9 +32,9 @@ npm test
 Twitterからこういうリクエストが来れば、こうする。というテストが手元でできます
 
 ```shell
-node app/controller.js sample sampleRequest/sample.json
+node middlewares/controller.js sample sampleRequests/sample.json
 
-# node app/controller.js [テストするコマンド] [テストするリクエストが書かれたjsonファイルへのパス]
+# node middlewares/controller.js [テストするコマンド] [テストするリクエストが書かれたjsonファイルへのパス]
 ```
 
 # ディレクトリ構造

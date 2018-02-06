@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         projectID: DataTypes.STRING,
         code: DataTypes.STRING,
         lineIndex: DataTypes.INTEGER,
+        language: DataTypes.STRING,
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,
     }, {

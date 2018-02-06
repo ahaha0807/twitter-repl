@@ -4,6 +4,7 @@ let fs = require('fs');
 
 let Sample = require('./sample');
 let Create = require('./create')
+let Post = require('./post')
 
 module.exports.controller = (command, data) => {
     switch (command) {
@@ -14,7 +15,7 @@ module.exports.controller = (command, data) => {
             Create.createProject(data);
             break;
         case 'post':
-            postCode(data);
+            Post.postCode(data);
             break;
         case 'save':
             saveProject(data);

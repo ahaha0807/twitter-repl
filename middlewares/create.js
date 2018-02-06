@@ -53,6 +53,6 @@ module.exports.createProject = (data) => {
 
             let project = new Project(projectId, language)
             project.setCode(code)
-            project.codeAdd()
+            project.codeAdd('プロジェクトを作成しました')
         })
 }

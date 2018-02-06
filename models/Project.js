@@ -17,7 +17,15 @@ class Project {
 
 
     static createId() {
-        return moment().format('YYYY/MM/DD HH:mm:ss')
+        return 'u'
+    }
+
+
+    static find(projectId) {
+        let db = EditorDB(sequelize, Sequelize)
+        return db.find({
+            where: {projectID: projectId}, order: [['updatedAt', 'DESC']]
+        })
     }
 
 
@@ -37,15 +45,14 @@ class Project {
         let text
 
         text =
-            `${this.language} のプロジェクトを作成しました。
+            `言語: ${this.language} 
 ID: ${this.projectId}
 `
-
         return text
     }
 
 
-    codeAdd() {
+    codeAdd(additionalResponse) {
         // FIXME: ここはこれじゃない。変なレコードが登録されるぞ
         this.editordb.findOrCreate({
                 where: {projectID: this.projectId}, order: [['updatedAt', 'DESC']]
@@ -55,23 +62,30 @@ ID: ${this.projectId}
 
             this.editordb.create({
                 projectID: this.projectId,
+                language: this.language,
                 code: this.code,
                 lineIndex: lineIndex + 1
             })
 
             let responseText = this.getInformation()
-            responseText += 'Page: ' + (lineIndex + 1)
+            responseText += 'Page: ' + (lineIndex + 1) + `
+`
+            responseText += additionalResponse
 
             accessor.sendResponse(responseText)
         }).catch(() => {
             // FIXME: This is AntiPattern
             this.editordb.create({
                 projectID: this.projectId,
+                language: this.language,
                 code: this.code,
                 lineIndex: 0
             }).then(() => {
                 let responseText = this.getInformation()
-                responseText += 'Page: 0'
+                responseText += `Page: 0
+`
+                responseText += additionalResponse
+
                 accessor.sendResponse(responseText)
             })
         })

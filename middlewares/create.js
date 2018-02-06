@@ -3,14 +3,23 @@
 let User = require('../models/User')
 let Project = require('../models/Project')
 
+const accessor = require('./accessor')
+const moment = require('moment')
+
 module.exports.createProject = (data) => {
     let user = new User(data.twitterId)
-    let projectId = ''
-
     user.hasProjectId()
         .then(_user => {
-            if (_user.projectID !== null) {
-                // error response (project is exist)
+            if (_user === null) {
+                User.createAccount(data.twitterId)
+            } else if (_user.projectID !== null) {
+                let responseText =
+                    `既にアカウントに紐付いたプロジェクトが存在します。
+:DISCONNECT とリプライを送り直し、紐付いたプロジェクトを削除してください。
+`
+                responseText += moment().format('YYYY MM/DD HH:mm:ss')
+                accessor.sendResponse(responseText)
+                return
             }
 
             let rawContents = data.replyContext.split(" ")
@@ -18,11 +27,25 @@ module.exports.createProject = (data) => {
             let code = rawContents.join(' ')
 
             if (!Project.checkLanguage(language)) {
-                // error response (you can't use this language)
+                let responseText =
+                    `申し訳ございません。Tweet_REPLは指定された言語に対応しておりません。
+メジャーな言語を選択しているにも関わらず、エラーが表示される場合は、言語名を変更して試してみてください。
+例）ジャバスク→Javascript, Go言語→Golang
+`
+                responseText += moment().format('YYYY MM/DD HH:mm:ss')
+                accessor.sendResponse(responseText)
+                return
             }
 
             if (code === '') {
-                // error response (code has unexpected)
+                let responseText =
+                    `コードの中身が存在しませんでした。
+":CREATE [言語名] [コード]"（それぞれの要素の間はすべて半角スペース区切り）
+の形式でリクエストを送信してください
+`
+                responseText += moment().format('YYYY MM/DD HH:mm:ss')
+                accessor.sendResponse(responseText)
+                return
             }
 
             let projectId = Project.createId()

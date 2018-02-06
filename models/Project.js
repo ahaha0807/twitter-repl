@@ -2,9 +2,9 @@ const languageDictionary = require('./LanguageDictonary')
 
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize('users', '', '', {dialect: 'sqlite', storage: './db/develop.db'})
+const moment = require('moment')
 
 let EditorDB = require('../repositories/editor')
-
 const accessor = require('../middlewares/accessor')
 
 class Project {
@@ -17,7 +17,7 @@ class Project {
 
 
     static createId() {
-        return "pyus"
+        return moment().format('YYYY/MM/DD HH:mm:ss')
     }
 
 

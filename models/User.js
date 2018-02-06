@@ -11,6 +11,15 @@ class User {
     }
 
 
+    static createAccount(twitterId) {
+        let db = UserDB(sequelize, Sequelize)
+
+        db.create({
+            twitterID: twitterId
+        })
+    }
+
+
     hasProjectId() {
         return this.db.find({where: {twitterID: this.twitterId}})
     }

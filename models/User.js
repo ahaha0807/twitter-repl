@@ -1,5 +1,7 @@
 const sqlite3 = require('sqlite3')
-const db = new sqlite3.Database("../db/develop.db", sqlite3.OPEN_READWRITE)
+const path = require('path')
+const dbPath = path.resolve(__dirname, '../db/develop.db')
+const db = new sqlite3.Database(dbPath)
 const moment = require('moment')
 
 class User {

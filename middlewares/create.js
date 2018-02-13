@@ -6,13 +6,16 @@ let Project = require('../models/Project')
 const accessor = require('./accessor')
 const moment = require('moment')
 
-module.exports.createProject = (request) => {
+module.exports.createProject = (request, isNewCummer) => {
+    if (isNewCummer) {
+        return
+    }
     let user = new User(request.twitterId)
     user.hasProjectId()
         .then(_user => {
             if (_user === undefined) {
                 User.createAccount(request.twitterId).then(() => {
-                    this.createProject(request)
+                    this.createProject(request, true)
                 })
             } else if (_user.projectID !== null) {
                 let responseText =

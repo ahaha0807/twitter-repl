@@ -1,6 +1,6 @@
-let sqlite3 = require('sqlite3')
-let db = new sqlite3.Database("../db/develop.db", sqlite3.OPEN_READWRITE)
-let moment = require('moment')
+const sqlite3 = require('sqlite3')
+const db = new sqlite3.Database("../db/develop.db", sqlite3.OPEN_READWRITE)
+const moment = require('moment')
 
 class User {
     constructor(_twitterId) {

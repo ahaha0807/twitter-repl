@@ -11,7 +11,7 @@ class User {
 
     static createAccount(twitterId) {
         return new Promise((resolve, reject) => {
-            let now = moment().format("YYYY-MM-DD HH:mm:ss ZZZ")
+            let now = moment().format("YYYY-MM-DD HH:mm:ss ZZ")
             db.serialize(() => {
                 db.run("INSERT INTO Users(twitterID, createdAt, updatedAt) " +
                     "VALUES(?, ?, ?)",
@@ -54,8 +54,8 @@ class User {
                         reject(err)
                     }
                     else {
-                        db.run("UPDATE Users SET projectID = ? , isConnect = 1 WHERE id = ?",
-                            [this.projectId, res.id],
+                        db.run("UPDATE Users SET projectID = ? , isConnect = 1, updatedAt = ? WHERE id = ?",
+                            [this.projectId, moment().format("YYYY-MM-DD HH:mm:ss ZZ"), res.id],
                             (err) => {
                                 if (err) {
                                     reject(err)

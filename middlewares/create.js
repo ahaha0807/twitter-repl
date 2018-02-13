@@ -6,12 +6,14 @@ let Project = require('../models/Project')
 const accessor = require('./accessor')
 const moment = require('moment')
 
-module.exports.createProject = (data) => {
-    let user = new User(data.twitterId)
+module.exports.createProject = (request) => {
+    let user = new User(request.twitterId)
     user.hasProjectId()
         .then(_user => {
-            if (_user === null) {
-                User.createAccount(data.twitterId)
+            if (_user === undefined) {
+                User.createAccount(request.twitterId).then(() => {
+                    this.createProject(request)
+                })
             } else if (_user.projectID !== null) {
                 let responseText =
                     `既にアカウントに紐付いたプロジェクトが存在します。
@@ -22,7 +24,7 @@ module.exports.createProject = (data) => {
                 return
             }
 
-            let rawContents = data.replyContext.split(" ")
+            let rawContents = request.replyContext.split(" ")
             let language = rawContents.shift()
             let code = rawContents.join(' ')
 

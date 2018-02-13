@@ -1,38 +1,72 @@
-const Sequelize = require('sequelize')
-const sequelize = new Sequelize('users', '', '', {dialect: 'sqlite', storage: './db/develop.db'})
-
-const UserDB = require('../repositories/user')
+let sqlite3 = require('sqlite3')
+let db = new sqlite3.Database("./db/develop.db", sqlite3.OPEN_READWRITE)
+let moment = require('moment')
 
 class User {
     constructor(_twitterId) {
         this.twitterId = _twitterId
         this.projectId = ''
-        this.db = UserDB(sequelize, Sequelize)
     }
 
 
     static createAccount(twitterId) {
-        let db = UserDB(sequelize, Sequelize)
-
-        db.create({
-            twitterID: twitterId
+        return new Promise((resolve, reject) => {
+            let now = moment().format("YYYY-MM-DD HH:mm:ss ZZZ")
+            db.serialize(() => {
+                db.run("INSERT INTO Users(twitterID, createdAt, updatedAt) " +
+                    "VALUES(?, ?, ?)",
+                    [twitterId, now, now],
+                    (err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve()
+                        }
+                    }
+                )
+            })
         })
     }
 
 
     hasProjectId() {
-        return this.db.find({where: {twitterID: this.twitterId}})
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.get("SELECT * FROM Users WHERE twitterID = ?", [this.twitterId], (err, row) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(row)
+                    }
+                })
+            })
+        })
     }
 
 
     connectProjectId(_projectId) {
-        this.projectId = _projectId
-        this.db.find({where: {twitterID: this.twitterId}})
-            .then(user => {
-                user.update({
-                    projectID: this.projectId
+        return new Promise((resolve, reject) => {
+            this.projectId = _projectId
+
+            db.serialize(() => {
+                db.get("SELECT * FROM Users WHERE twitterID = ?", [this.twitterId], (err, res) => {
+                    if (err) {
+                        reject(err)
+                    }
+                    else {
+                        db.run("UPDATE Users SET projectID = ? , isConnect = 1 WHERE id = ?",
+                            [this.projectId, res.id],
+                            (err) => {
+                                if (err) {
+                                    reject(err)
+                                } else {
+                                    resolve()
+                                }
+                            })
+                    }
                 })
             })
+        })
     }
 }
 

@@ -1,5 +1,5 @@
 let sqlite3 = require('sqlite3')
-let db = new sqlite3.Database("./db/develop.db", sqlite3.OPEN_READWRITE)
+let db = new sqlite3.Database("../db/develop.db", sqlite3.OPEN_READWRITE)
 let moment = require('moment')
 
 class User {

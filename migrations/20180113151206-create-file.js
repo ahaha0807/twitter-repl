@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       code: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT("long")
       },
       createdAt: {
         allowNull: false,

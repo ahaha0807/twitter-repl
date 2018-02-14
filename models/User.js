@@ -31,6 +31,30 @@ class User {
     }
 
 
+    static disconnect(twitterId) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.get("SELECT * FROM Users WHERE twitterID = ?", [twitterId], (err, res) => {
+                    if (err) {
+                        reject(err)
+                    }
+                    else {
+                        db.run("UPDATE Users SET projectID = null , isConnect = 0, updatedAt = ? WHERE id = ?",
+                            [moment().format("YYYY-MM-DD HH:mm:ss ZZ"), res.id],
+                            (err) => {
+                                if (err) {
+                                    reject(err)
+                                } else {
+                                    resolve()
+                                }
+                            })
+                    }
+                })
+            })
+        })
+    }
+
+
     hasProjectId() {
         return new Promise((resolve, reject) => {
             db.serialize(() => {

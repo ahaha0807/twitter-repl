@@ -34,8 +34,8 @@ module.exports.createProject = (request, isNewCummer) => {
             if (!Project.checkLanguage(language)) {
                 let responseText = '@' + request.twitterId + ' \n'
                 responseText += `申し訳ございません。Tweet_REPLは指定された言語に対応しておりません。
-メジャーな言語を選択しているにも関わらず、エラーが表示される場合は、言語名を変更して試してみてください。
-例）ジャバスク→Javascript, Go言語→Golang
+メジャーな言語を選択しているにも関わらずエラーが表示される場合は、言語の名前を半角英字に変更して試してみてください。
+例）ジャバスク→javascript, Go言語→go
 `
                 responseText += moment().format('YYYY MM/DD HH:mm:ss')
                 accessor.sendResponse(responseText)

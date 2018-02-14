@@ -1,8 +1,34 @@
 const LanguageDictonary = [
     'javascript',
-    'Javascript',
-    'JavaScript',
-    'Ruby'
+    'c',
+    'cpp',
+    'objective-c',
+    'java',
+    'kotlin',
+    'scala',
+    'swift',
+    'csharp',
+    'go',
+    'haskell',
+    'erlang',
+    'perl',
+    'python',
+    'python3',
+    'ruby',
+    'php',
+    'bash',
+    'r',
+    'javascript',
+    'coffeescript',
+    'vb',
+    'cobol',
+    'fsharp',
+    'd',
+    'clojure',
+    'elixir',
+    'mysql',
+    'rust',
+    'scheme',
+    'plain'
 ]
-
 module.exports = LanguageDictonary

@@ -6,6 +6,7 @@ let Sample = require('./sample')
 let Create = require('./create')
 let Post = require('./post')
 let Save = require('./save')
+let Run = require('./run')
 
 module.exports.controller = (command, data) => {
     switch (command) {
@@ -20,6 +21,9 @@ module.exports.controller = (command, data) => {
             break
         case 'save':
             Save.saveProject(data)
+            break
+        case  'run':
+            Run.run(data)
             break
         case 'reconnect':
             reconnect(data)

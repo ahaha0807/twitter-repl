@@ -1,4 +1,5 @@
 const Twitter = require('twitter')
+const paiza_io = require('paiza-io')
 
 module.exports.sendResponse = function (text) {
     // FIXME: こんなの（key直書きなんて）絶対おかしいよ！
@@ -16,4 +17,15 @@ module.exports.sendResponse = function (text) {
                 console.log(tweet)
             }
         })
+}
+
+module.exports.paizaRun = (language, code) => {
+    return new Promise((resolve, reject) => {
+        paiza_io(language, code, '', (err, result) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(result.stdout)
+        })
+    })
 }

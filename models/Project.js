@@ -16,8 +16,8 @@ class Project {
     }
 
 
-    static createId() {
-        return 'xa03g30d91kh9'
+    static createId(twitterId) {
+        return twitterId + '-' + moment().format("YYYY-MM-DD-HH:mm:ss")
     }
 
 

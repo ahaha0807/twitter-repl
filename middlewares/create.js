@@ -53,7 +53,7 @@ module.exports.createProject = (request, isNewCummer) => {
                 return
             }
 
-            let projectId = Project.createId()
+            let projectId = Project.createId(request.twitterId)
             user.connectProjectId(projectId)
 
             let project = new Project(projectId, language)

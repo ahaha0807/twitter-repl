@@ -11,7 +11,7 @@ module.exports.saveProject = data => {
 
     user.hasProjectId()
         .then(_user => {
-                if (_user === undefined || _user.projectID === undefined) {
+            if (_user === undefined || _user.projectID === undefined) {
                     let responseText =
                         `アカウントに紐づくプロジェクトが存在しませんでした。
 ":CREATE [言語名] [コード]"（それぞれの要素の間はすべて半角スペース区切り）

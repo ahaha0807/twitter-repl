@@ -1,35 +1,35 @@
-'use strict';
+'use strict'
 
-let fs = require('fs');
+let fs = require('fs')
 
-let Sample = require('./sample');
+let Sample = require('./sample')
 let Create = require('./create')
 let Post = require('./post')
 
 module.exports.controller = (command, data) => {
     switch (command) {
         case 'sample':
-            Sample.sample(data);
-            break;
+            Sample.sample(data)
+            break
         case 'new':
-            Create.createProject(data);
-            break;
+            Create.createProject(data)
+            break
         case 'post':
-            Post.postCode(data);
-            break;
+            Post.postCode(data)
+            break
         case 'save':
-            saveProject(data);
-            break;
+            saveProject(data)
+            break
         case 'reconnect':
-            reconnect(data);
-            break;
+            reconnect(data)
+            break
         case 'check':
-            checkHasProject(data);
-            break;
+            checkHasProject(data)
+            break
         default :
-            console.error("Twitterに対してエラーレスポンスする");
+            console.error("Twitterに対してエラーレスポンスする")
     }
-};
+}
 
 // CLI実行用
 /*
@@ -39,18 +39,18 @@ module.exports.controller = (command, data) => {
 *   node middlewares/controller.js [テストするコマンド] [テストするリクエストが書かれたjsonファイルへのパス]
 */
 const controllerWithArgs = () => {
-    let args = process.argv[2];
-    let filePath = process.argv[3];
+    let args = process.argv[2]
+    let filePath = process.argv[3]
 
     fs.readFile(filePath, 'utf-8', (err, rawContents) => {
         if (err !== null) {
-            console.error(err);
+            console.error(err)
         }
 
-        let contents = JSON.parse(rawContents);
+        let contents = JSON.parse(rawContents)
 
-        this.controller(args, contents);
-    });
-};
+        this.controller(args, contents)
+    })
+}
 
-controllerWithArgs();
+controllerWithArgs()

@@ -17,6 +17,7 @@
   "dependencies": {
     "mocha": "^5.0.0",
     "moment": "^2.20.1",
+    "paiza-io": "^0.2.3",
     "sequelize": "^4.31.0",
     "sequelize-cli": "^3.2.0",
     "sqlite3": "^3.1.13",

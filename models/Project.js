@@ -36,6 +36,51 @@ class Project {
     }
 
 
+    static getAll(projectId) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.all("SELECT * FROM Editors WHERE projectID = ?", [projectId], (err, rows) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(rows)
+                    }
+                })
+            })
+        })
+    }
+
+
+    static createFileId(twitterId) {
+        return twitterId + moment().format("YYYY-MM-DD-HH-mm-ss")
+    }
+
+
+    static save(fileInfo) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.run("INSERT INTO Files(fileId, twitterId, language, code, createdAt, updatedAt) " +
+                    "VALUES(?, ?, ?, ?, ?, ?)",
+                    [
+                        Project.createFileId(fileInfo.twitterId),
+                        fileInfo.twitterId,
+                        fileInfo.language,
+                        fileInfo.code,
+                        moment().format("YYYY-MM-DD HH-mm-ss ZZ"),
+                        moment().format("YYYY-MM-DD HH-mm-ss ZZ")
+                    ],
+                    (err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve()
+                        }
+                    })
+            })
+        })
+    }
+
+
     static checkLanguage(selectedLanguage) {
         return languageDictionary.find(language => {
             return language === selectedLanguage

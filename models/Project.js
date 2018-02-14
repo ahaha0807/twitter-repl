@@ -16,6 +16,21 @@ class Project {
     }
 
 
+    static getCodeFromFile(twitterId) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.get("SELECT * FROM Files WHERE twitterId = ? ORDER BY createdAt DESC", [twitterId], (err, row) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(row)
+                    }
+                })
+            })
+        })
+    }
+
+
     static createId(twitterId) {
         return twitterId + '-' + moment().format("YYYY-MM-DD-HH:mm:ss")
     }

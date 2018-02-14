@@ -13,6 +13,13 @@ const formatCommand = (rawCommand) => {
             break
         case ":POST":
             result = 'post'
+            break
+        case ":SAVE":
+            result = 'save'
+            break
+        case ":RUN":
+            result = 'run'
+            break
     }
     return result
 }

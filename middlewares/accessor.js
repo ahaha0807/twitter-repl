@@ -13,8 +13,8 @@ module.exports.sendResponse = function (text) {
     client.post('statuses/update',
         {status: text},
         function (error, tweet) {
-            if (!error) {
-                console.log(tweet)
+            if (error) {
+                console.log(error)
             }
         })
 }

@@ -18,8 +18,8 @@ module.exports.createProject = (request, isNewCummer) => {
                     this.createProject(request, true)
                 })
             } else if (_user.projectID !== null) {
-                let responseText =
-                    `既にアカウントに紐付いたプロジェクトが存在します。
+                let responseText = '@' + request.twitterId + ' \n'
+                responseText += `既にアカウントに紐付いたプロジェクトが存在します。
 :DISCONNECT とリプライを送り直し、紐付いたプロジェクトを削除してください。
 `
                 responseText += moment().format('YYYY MM/DD HH:mm:ss')
@@ -32,8 +32,8 @@ module.exports.createProject = (request, isNewCummer) => {
             let code = rawContents.join(' ')
 
             if (!Project.checkLanguage(language)) {
-                let responseText =
-                    `申し訳ございません。Tweet_REPLは指定された言語に対応しておりません。
+                let responseText = '@' + request.twitterId + ' \n'
+                responseText += `申し訳ございません。Tweet_REPLは指定された言語に対応しておりません。
 メジャーな言語を選択しているにも関わらず、エラーが表示される場合は、言語名を変更して試してみてください。
 例）ジャバスク→Javascript, Go言語→Golang
 `
@@ -43,8 +43,8 @@ module.exports.createProject = (request, isNewCummer) => {
             }
 
             if (code === '') {
-                let responseText =
-                    `コードの中身が存在しませんでした。
+                let responseText = '@' + request.twitterId + ' \n'
+                responseText += `コードの中身が存在しませんでした。
 ":CREATE [言語名] [コード]"（それぞれの要素の間はすべて半角スペース区切り）
 の形式でリクエストを送信してください
 `
@@ -58,6 +58,6 @@ module.exports.createProject = (request, isNewCummer) => {
 
             let project = new Project(projectId, language)
             project.setCode(code)
-            project.codeAdd('プロジェクトを作成しました')
+            project.codeAdd(request.twitterId, 'プロジェクトを作成しました')
         })
 }

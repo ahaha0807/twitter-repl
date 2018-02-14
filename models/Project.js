@@ -145,7 +145,7 @@ ID: ${this.projectId}
     }
 
 
-    codeAdd(additionalResponse) {
+    codeAdd(twitterId, additionalResponse) {
         Project.find(this.projectId)
             .then(data => {
                 if (data === undefined) {
@@ -161,8 +161,9 @@ ID: ${this.projectId}
                     code: this.code,
                     lineIndex: lineIndex
                 }).then(() => {
-                    let responseText = this.getInformation()
-                    responseText += 'Page: ' + (lineIndex) + `
+                    let responseText = '@' + twitterId + ' \n'
+                    responseText += this.getInformation()
+                    responseText += 'Line: ' + (lineIndex) + `
 `
                     responseText += additionalResponse
 

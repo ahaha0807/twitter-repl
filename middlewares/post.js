@@ -12,8 +12,8 @@ module.exports.postCode = data => {
     user.hasProjectId()
         .then(_user => {
             if (_user === undefined || _user.projectID === undefined) {
-                let responseText =
-                    `アカウントに紐づくプロジェクトが存在しませんでした。
+                let responseText = '@' + data.twitterId + ' \n'
+                responseText += `アカウントに紐づくプロジェクトが存在しませんでした。
 ":CREATE [言語名] [コード]"（それぞれの要素の間はすべて半角スペース区切り）
 の形式でリクエストを送信し、プロジェクトを作成してください
 `
@@ -25,8 +25,8 @@ module.exports.postCode = data => {
         })
         .then(_project => {
             if (data.replyContext === '') {
-                let responseText =
-                    `コードの中身が存在しませんでした。
+                let responseText = '@' + data.twitterId + ' \n'
+                responseText += `コードの中身が存在しませんでした。
 `
                 responseText += moment().format('YYYY MM/DD HH:mm:ss')
                 accessor.sendResponse(responseText)
@@ -35,6 +35,16 @@ module.exports.postCode = data => {
 
             let project = new Project(_project.projectID, _project.language)
             project.setCode(data.replyContext)
-            project.codeAdd('コードを保存しました')
+            project.codeAdd(data.twitterId, 'コードを保存しました')
+        })
+        .catch(() => {
+            let responseText = '@' + data.twitterId + ' \n'
+            responseText += `アカウントに紐づくプロジェクトが存在しませんでした。
+":CREATE [言語名] [コード]"（それぞれの要素の間はすべて半角スペース区切り）
+の形式でリクエストを送信し、プロジェクトを作成してください
+`
+            responseText += moment().format('YYYY MM/DD HH:mm:ss')
+            accessor.sendResponse(responseText)
+            return
         })
 }

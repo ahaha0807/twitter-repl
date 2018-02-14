@@ -12,8 +12,8 @@ module.exports.run = data => {
     user.hasProjectId()
         .then(_user => {
                 if (_user === undefined || _user.projectID === undefined) {
-                    let responseText =
-                        `アカウントに紐づくプロジェクトが存在しませんでした。
+                    let responseText = '@' + data.twitterId + ' \n'
+                    responseText += `アカウントに紐づくプロジェクトが存在しませんでした。
 ":CREATE [言語名] [コード]"（それぞれの要素の間はすべて半角スペース区切り）
 の形式でリクエストを送信し、プロジェクトを作成してください
 `
@@ -29,6 +29,10 @@ module.exports.run = data => {
             return accessor.paizaRun(project.language, project.code)
         })
         .then(result => {
-            accessor.sendResponse('@' + data.twitterId + ' \n' + result)
+            let responseText = '@' + data.twitterId + ' \n' + result
+            responseText += moment().format('YYYY MM/DD HH:mm:ss')
+
+            accessor.sendResponse(responseText)
+            return
         })
 }

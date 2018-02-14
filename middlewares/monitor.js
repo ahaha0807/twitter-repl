@@ -58,7 +58,6 @@ module.exports.monitor = () => {
             let rawRequest = tweet.text
             let request = formatter(rawRequest, tweet.user.screen_name)
 
-            console.log(request)
             Controller.controller(request.command, request.data)
         })
 

@@ -36,6 +36,8 @@ module.exports.createProject = (request, isNewCummer) => {
                 responseText += `申し訳ございません。Tweet_REPLは指定された言語に対応しておりません。
 メジャーな言語を選択しているにも関わらずエラーが表示される場合は、言語の名前を半角英小文字に変更して試してみてください。
 例）ジャバスク→javascript, Go言語→go
+
+詳しくはこちら→ https://goo.gl/tQv4wN
 `
                 responseText += moment().format('YYYY MM/DD HH:mm:ss')
                 accessor.sendResponse(responseText)

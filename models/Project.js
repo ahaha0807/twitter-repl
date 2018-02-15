@@ -6,7 +6,7 @@ const dbPath = path.resolve(__dirname, '../db/develop.db')
 const db = new sqlite3.Database(dbPath)
 
 const accessor = require('../middlewares/accessor')
-const languageDictionary = require('./LanguageDictonary')
+const languageDictionary = require('./LanguageDictionary')
 
 class Project {
     constructor(_projectId, _language) {

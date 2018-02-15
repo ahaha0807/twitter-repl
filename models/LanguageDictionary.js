@@ -1,4 +1,4 @@
-const LanguageDictonary = [
+const LanguageDictionary = [
     'javascript',
     'c',
     'cpp',
@@ -31,4 +31,5 @@ const LanguageDictonary = [
     'scheme',
     'plain'
 ]
-module.exports = LanguageDictonary
+
+module.exports = LanguageDictionary

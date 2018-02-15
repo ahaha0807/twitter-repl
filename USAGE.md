@@ -94,7 +94,6 @@ console.log(sample); // 最初のlet sample の中身が引き継がれるので
 
 # 対応言語リスト（一部未確認のため対応しているか不明）
 
-    - javascript
     - c
     - cpp
     - objective-c

@@ -6,7 +6,7 @@ const Controller = require('./controller')
 const TWITTER_ID = 'Tweet_REPL'
 
 const formatCommand = (rawCommand) => {
-    let result = 'post'
+    let result = 'help'
     switch (rawCommand) {
         case ":CREATE":
             result = 'new'
@@ -16,6 +16,9 @@ const formatCommand = (rawCommand) => {
             break
         case ":SAVE":
             result = 'save'
+            break
+        case ":DISCONNECT":
+            result = 'disconnect'
             break
         case ":RUN":
             result = 'run'

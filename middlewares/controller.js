@@ -2,16 +2,17 @@
 
 let fs = require('fs')
 
-let Sample = require('./sample')
+let Help = require('./help')
 let Create = require('./create')
 let Post = require('./post')
 let Save = require('./save')
 let Run = require('./run')
+const Disconnect = require("./disconnect")
 
 module.exports.controller = (command, data) => {
     switch (command) {
-        case 'sample':
-            Sample.sample(data)
+        case 'help':
+            Help.help(data)
             break
         case 'new':
             Create.createProject(data)
@@ -25,8 +26,8 @@ module.exports.controller = (command, data) => {
         case  'run':
             Run.run(data)
             break
-        case 'reconnect':
-            reconnect(data)
+        case 'disconnect':
+            Disconnect.disconnect(data)
             break
         case 'check':
             checkHasProject(data)
@@ -39,7 +40,7 @@ module.exports.controller = (command, data) => {
 // CLI実行用
 /*
 * サンプルリクエスト
-*   node middlewares/controller.js sample sampleRequests/sample.json
+*   node middlewares/controller.js help sampleRequests/help.json
 *
 *   node middlewares/controller.js [テストするコマンド] [テストするリクエストが書かれたjsonファイルへのパス]
 */

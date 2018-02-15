@@ -53,7 +53,7 @@ node middlewares/controller.js sample sampleRequests/sample.json
 │   ├── accessor.js # 外部APIアクセス処理
 │   ├── controller.js # コマンドの処理振り分け
 │   ├── monitor.js # Twitterのリプライを監視
-│   └── sample.js # 各コマンドのフローはこんな感じでコマンドあたり一つのファイルまとめる
+│   └── help.js # 各コマンドのフローはこんな感じでコマンドあたり一つのファイルまとめる
 ├── migrations/ # マイグレーションファイル置き場（sequelizeによって作成）
 ├── repositories/ # ORM処理置き場（sequelizeによって作成=>repositoriesにディレクトリ名変更）
 ├── node_modules/ 

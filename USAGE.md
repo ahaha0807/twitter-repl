@@ -92,33 +92,33 @@ console.log(sample); // 最初のlet sample の中身が引き継がれるので
 @Tweet_REPL :RUN hogehogeho----
 ```
 
-# 対応言語リスト（一部未確認のため対応しているか不明）
+# 対応言語リスト
 
-    - c
-    - cpp
-    - objective-c
-    - java
-    - kotlin
-    - scala
-    - swift
-    - csharp
-    - go
-    - haskell
-    - erlang
-    - perl
-    - python
-    - python3
-    - ruby
-    - php
-    - bash
-    - r
-    - javascript
-    - coffeescript
-    - vb
-    - cobol
-    - fsharp
-    - d
-    - clojure
-    - elixir
-    - rust
-    - scheme
+- c
+- cpp
+- objective-c
+- java
+- kotlin
+- scala
+- swift
+- csharp
+- go
+- haskell
+- erlang
+- perl
+- python
+- python3
+- ruby
+- php
+- bash
+- r
+- javascript
+- coffeescript
+- vb
+- cobol
+- fsharp
+- d
+- clojure
+- elixir
+- rust
+- scheme
